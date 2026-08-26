@@ -53,7 +53,7 @@ FROM EMP;
 -- ============================================================
 -- 2. WAQTD ename and job for all the employees with their half-term salary.
 -- ============================================================
-SELECT ENAME, SAL, SAL*6  HaltTermSal
+SELECT ENAME, SAL, SAL*6  HalfTermSal
 FROM EMP;
 
 -- ============================================================
@@ -100,5 +100,97 @@ FROM EMP;
 SELECT ENAME, JOB, SAL, SAL -100 AS SalWiPanalty
 FROM EMP;
 
+-- ============================================================
+-- 11. WAQTD name of employee who is earning more than 500.
+-- ============================================================
+
+SELECT ENAME
+FROM EMP
+WHERE SAL=5000;
+
+SELECT ENAME
+FROM EMP
+WHERE ENAME='SMITH';
+
+-- ============================================================
+-- 11. WAQTD DETAILS OF THE EMP WHO IS WORKING AS ANALYST
+-- ============================================================
+
+SELECT *
+FROM EMP
+WHERE JOB='ANALYST';
+
+SELECT ENAME
+FROM EMP
+WHERE HIREDATE='2023-04-19';
+
+-- =========================== QUESTION 1==========================
+SELECT ENAME, SAL*12 AS ANNUALSAL
+FROM EMP
+WHERE ENAME='SMITH';
+
+-- =========================== QUESTION 2 ==========================
+SELECT ENAME
+FROM emp
+WHERE JOB='CLERK';
+
+-- =========================== QUESTION 3 ==========================
+SELECT ENAME
+FROM EMP
+WHERE JOB='SALESMAN';
+
+-- =========================== QUESTION 4 ==========================
+select * 
+FROM EMP
+WHERE SAL>2000;
+-- =========================== QUESTION 5 ==========================
+SELECT *
+FROM EMP
+WHERE ENAME='JONES';
+-- =========================== QUESTION 6 ==========================
+SELECT *
+FROM EMP
+WHERE HIREDATE>1981-01-01;
+-- =========================== QUESTION 7 ==========================
+SELECT ENAME,SAL, SAL*12 AS ANNUALSAL
+FROM EMP
+WHERE SAL*12>12000;
+-- =========================== QUESTION 8 ==========================
+SELECT EMPNO
+FROM EMP
+WHERE DEPTNO=30;
+-- =========================== QUESTION 9 ==========================
+SELECT ENAME, HIREDATE
+FROM EMP
+WHERE HIREDATE<1981-01-01;
+-- =========================== QUESTION 10 ==========================
+SELECT *
+FROM EMP
+WHERE JOB='MANAGER';
+
+-- =========================== QUESTION 11 ==========================
+SELECT ENAME, SAL
+FROM EMP
+WHERE COMM=1400;
+
+-- =========================== QUESTION 12 ==========================
+SELECT *
+FROM EMP
+WHERE COMM>SAL;
+
+-- =========================== QUESTION 13 ==========================
+SELECT EMPNO
+FROM EMP
+WHERE HIREDATE<'2022-01-01';
+
+-- =========================== QUESTION 14 ==========================
+SELECT *
+FROM EMP
+WHERE JOB='ANALYST';
+
+-- =========================== QUESTION 15 ==========================
+SELECT *
+FROM EMP
+WHERE SAL>2000;
 
 SELECT * FROM EMP;
