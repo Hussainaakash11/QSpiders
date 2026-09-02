@@ -30,10 +30,148 @@ INSERT INTO EMP (EMPNO, ENAME, JOB, MGR, HIREDATE, SAL, COMM, DEPTNO) VALUES
 (1011, 'ADAMS',    'CLERK',        7788, '2024-05-23', 1100, NULL, 20),
 (1012, 'JAMES',    'CLERK',        7698, '2022-12-03', 950,  NULL, 30),
 (1013, 'FORD',     'ANALYST',      7566, '2021-12-03', 3000, NULL, 20),
-(1014, 'MILLER',   'CLERK',        7782, '2023-01-23', 1300, NULL, 10),
-(1015, 'WILSON',   'DEVELOPER',    7566, '2024-03-15', 3500, NULL, 20),
-(1016, 'DAVIS',    'DEVELOPER',    7566, '2023-07-10', 3800, NULL, 20),
-(1017, 'TAYLOR',   'HR',           7839, '2022-08-12', 2700, NULL, 10),
-(1018, 'ANDERSON', 'TESTER',       7566, '2023-09-25', 2800, NULL, 20),
-(1019, 'THOMAS',   'SUPPORT',      7698, '2024-01-18', 2200, 200,  30),
-(1020, 'JACKSON',  'DATA ANALYST', 7566, '2024-02-05', 3200, NULL, 20);
+(1014, 'MILLER',   'CLERK',        7782, '2023-01-23', 1300, NULL, 10);
+
+-- IN OPERATOR 
+select ename, deptno
+from emp
+where deptno IN (10,20);
+
+-- BETWEEN OP
+select ename, sal
+from emp
+where sal between 1521 and 2999;
+
+-- RANGE IN BETWEEN OP
+select ename, sal
+from emp
+where sal between 1000 and 3000;
+
+-- IS OP
+select *
+from emp
+where COMM is null;
+
+
+-- IS NOT oprator
+select *
+from emp
+where COMM is not null;
+
+-- LIKE op
+select ename
+from emp
+where ename like 'S%';
+
+select *
+from emp
+where ename like '%R';
+
+select ename
+from emp
+where ename like '_M%';
+
+select ename
+from emp
+where ename like '%A%';
+
+-- Q1
+select *
+from emp
+where COMM is null;
+
+-- Q2
+select *
+from emp
+where mgr is null;
+
+-- Q3
+select *
+from emp
+where JOB iN('SALESMAN') AND DEPTNO IN (30);
+
+-- Q4
+select *
+from emp
+where JOB iN('SALESMAN') AND DEPTNO IN (30) AND SAL>1500;
+
+-- Q5
+select *
+from emp
+where ENAME LIKE 'S%' OR ENAME LIKE 'A%';
+
+-- Q6
+select *
+from emp
+where DEPTNO NOT IN (10,20);
+
+-- Q7
+select *
+from emp
+where ENAME NOT LIKE 'S%'; 
+
+-- Q8
+-- CHECK USING CHATGPT
+select *
+from emp
+where MGR IS NOT NULL AND DEPTNO IN (10) ;
+
+-- Q9 
+select *
+from emp
+where JOB iN('CLERK') AND COMM IS NULL;
+
+-- Q10
+select *
+from emp
+where MGR IS NULL AND DEPTNO IN (10,30);
+
+-- Q11
+select *
+from emp
+where JOB iN ('SALESMAN') AND DEPTNO IN (30) AND SAL<2450;
+
+-- Q12 
+select *
+from emp
+where JOB iN ('ANALYST') AND DEPTNO IN (20) AND SAL>2500;
+
+-- Q13
+select *
+from emp
+where ENAME LIKE 'M%' OR 'J%';
+
+-- Q14
+select *, SAL*12 AS ANNUALSAL
+from emp
+where DEPTNO NOT IN (30);
+
+-- Q15
+select *
+from emp
+where ENAME NOT LIKE '%ES' OR '%R';
+
+-- Q16
+select *, SAL+SAL*10/100 AS HIKE
+from emp
+where DEPTNO IN (10) AND MGR IS NOT NULL;
+
+-- Q17
+select * 
+from emp
+where job in ('salesman') and ename like '%E%' and sal>999; 
+
+-- Q18
+select * 
+from emp 
+where hiredate>2022;
+
+-- Q19
+select * 
+from emp
+where hiredate like '%-2-%';
+
+-- Q20
+select * 
+from emp
+where job in ('Manager','clerk') and deptno in (10,20) and sal between 1000 and 3000 ;
