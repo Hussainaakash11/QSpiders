@@ -159,7 +159,7 @@ where DEPTNO IN (10) AND MGR IS NOT NULL;
 -- Q17
 select * 
 from emp
-where job in ('salesman') and ename like '%E%' and sal>999; 
+where job in ('salesman') and ename like '%E_' and sal LIKE '____'; 
 
 -- Q18
 select * 
@@ -175,3 +175,126 @@ where hiredate like '%-2-%';
 select * 
 from emp
 where job in ('Manager','clerk') and deptno in (10,20) and sal between 1000 and 3000 ;
+
+
+# SQL Aggregate Functions Assignment — Questions 1–20
+
+
+-- 1. WAQTD number of employees getting salary less than 2000 in DEPTNO 10.
+SELECT COUNT(*) AS NUMBER_OF_EMPS
+FROM EMP
+WHERE SAL<2000 AND DEPTNO=10;
+
+
+-- 2. WAQTD total salary needed to pay employees working as CLERK.
+SELECT SUM(SAL) AS TOTAL_SAL
+FROM EMP
+WHERE JOB='CLERK';
+
+
+-- 3. WAQTD average salary needed to pay all employees.
+SELECT AVG(SAL) AS AVG_SAL
+FROM EMP;
+
+
+-- 4. WAQTD number of employees having 'A' as their first character.
+SELECT COUNT(*) AS NUMBER_OF_EMPS
+FROM EMP
+WHERE ENAME LIKE 'A%';
+
+
+-- 5. WAQTD number of employees working as CLERK OR MANAGER.
+SELECT COUNT(*) AS NUMBER_OF_EMPS
+FROM EMP
+WHERE JOB='CLERK' OR JOB='MANAGER';
+
+
+-- 6. WAQTD total salary needed to pay employees hired in FEB.
+SELECT SUM(SAL) AS TOTAL_SAL
+FROM EMP
+WHERE TO_CHAR(HIREDATE,'MON')='FEB';
+
+
+-- 7. WAQTD number of employees reporting to 7839 (MGR).
+SELECT COUNT(*) AS NUMBER_OF_EMPS
+FROM EMP
+WHERE MGR=7839;
+
+
+-- 8. WAQTD number of employees getting commission in DEPTNO 30.
+SELECT COUNT(*) AS NUMBER_OF_EMPS
+FROM EMP
+WHERE COMM IS NOT NULL AND DEPTNO=30;
+
+
+-- 9. WAQTD average salary, total salary, number of employees and maximum salary
+-- given to employees working as PRESIDENT.
+SELECT AVG(SAL) AS AVG_SAL,
+       SUM(SAL) AS TOTAL_SAL,
+       COUNT(*) AS NUMBER_OF_EMPS,
+       MAX(SAL) AS MAX_SAL
+FROM EMP
+WHERE JOB='PRESIDENT';
+
+
+-- 10. WAQTD number of employees having 'A' in their names.
+SELECT COUNT(*) AS NUMBER_OF_EMPS
+FROM EMP
+WHERE ENAME LIKE '%A%';
+
+
+-- 11. WAQTD number of employees and total salary needed to pay the employees
+-- who have 2 consecutive L's in their names.
+SELECT COUNT(*) AS NUMBER_OF_EMPS,
+       SUM(SAL) AS TOTAL_SAL
+FROM EMP
+WHERE ENAME LIKE '%LL%';
+
+
+-- 12. WAQTD number of departments present in EMPLOYEE table.
+SELECT COUNT(DISTINCT DEPTNO) AS NUMBER_OF_DEPTS
+FROM EMP;
+
+
+-- 13. WAQTD number of employees having character 'Z' in their names.
+SELECT COUNT(*) AS NUMBER_OF_EMPS
+FROM EMP
+WHERE ENAME LIKE '%Z%';
+
+
+-- 14. WAQTD number of employees having 'S' in their names.
+SELECT COUNT(*) AS NUMBER_OF_EMPS
+FROM EMP
+WHERE ENAME LIKE '%S%';
+
+
+-- 15. WAQTD total salary given to employees working as CLERK in DEPTNO 30.
+SELECT SUM(SAL) AS TOTAL_SAL
+FROM EMP
+WHERE JOB='CLERK' AND DEPTNO=30;
+
+
+-- 16. WAQTD maximum salary given to the employees working as ANALYST.
+SELECT MAX(SAL) AS MAX_SAL
+FROM EMP
+WHERE JOB='ANALYST';
+
+
+-- 17. WAQTD number of distinct salaries present in EMPLOYEE table.
+SELECT COUNT(DISTINCT SAL) AS NUMBER_OF_DISTINCT_SAL
+FROM EMP;
+
+-- 18. WAQTD number of jobs present in EMPLOYEE table.
+SELECT COUNT(DISTINCT JOB) AS NUMBER_OF_JOBS
+FROM EMP;
+
+-- 19. WAQTD average salary given to the CLERK.
+SELECT AVG(SAL) AS AVG_SAL
+FROM EMP
+WHERE JOB='CLERK';
+
+-- 20. WAQTD minimum salary given to the employees who work in DEPTNO 10
+-- as MANAGER OR CLERK.
+SELECT MIN(SAL) AS MIN_SAL
+FROM EMP
+WHERE DEPTNO=10 AND (JOB='MANAGER' OR JOB='CLERK');
