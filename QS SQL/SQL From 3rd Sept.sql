@@ -70,3 +70,145 @@ where deptno=(select deptno from emp where ename='jones');
 select ename, job
 from emp
 where job=(select job from emp where ename='james');
+
+-- Q5 
+select empno, ename, sal*12 as annualsal
+from emp
+where sal*12>(select sal*12 from emp where ename='ward');
+
+-- Q6 
+select ename, hiredate
+from emp
+where hiredate<(select hiredate from emp where ename='scott');
+
+-- Q7
+
+
+-- =================================
+-- DEPARTMENT TABLE
+-- =================================
+
+CREATE TABLE dept (
+    DEPTNO     INT PRIMARY KEY,
+    DNAME     VARCHAR(20),
+    LOC       VARCHAR(20)
+);
+
+INSERT INTO DEPT (DEPTNO, DNAME, LOC) VALUES
+(10, "ACCOUNTING", "NEW YORK"),
+(20, "RESEARCH", "DALLAS"),
+(30, "SALES", "CHICAGO"),
+(40, "OPERATIONS", "BOSTON");
+
+SELECT * FROM DEPT;
+
+-- Q1
+select dname
+from dept
+where deptno = (select deptno from emp where ename='smith');
+
+-- Q2
+select dname, loc 
+from dept
+where deptno =(select deptno from emp where ename='king');
+
+-- Q3
+select loc 
+from dept
+where deptno=(select deptno from emp where empno=7902);
+
+-- Q4 
+select dname, loc, deptno
+from dept
+where deptno in (select deptno from emp where ename like '%R');
+
+-- Q5 
+select dname
+from dept
+where deptno=(select deptno from emp where job='president');
+
+-- Q6 
+select ename
+from emp 
+where deptno=(select deptno from dept where dname='Accounting');
+
+-- ==========================================
+--      CASE 1 & 2
+-- ==========================================
+
+-- Q31
+select ename 
+from emp
+where deptno in (select deptno from dept where dname='accounting');
+
+-- Q32 
+SELECT *
+FROM EMP
+WHERE JOB = 'MANAGER' AND DEPTNO IN (SELECT DEPTNO FROM DEPT WHERE LOC='CHICAGO');
+
+-- Q33
+SELECT ENAME, SAL
+FROM EMP
+WHERE SAL<(SELECT SAL FROM EMP WHERE ENAME='KING' AND DEPTNO IN (SELECT DEPTNO FROM DEPT WHERE DNAME='ACCOUNTING')); 
+
+-- Q34
+SELECT * 
+FROM EMP
+WHERE JOB='SALESMAN' AND DEPTNO IN (SELECT DEPTNO FROM DEPT WHERE DNAME='SALES');
+
+-- Q35 
+SELECT ENAME, SAL, JOB, HIREDATE
+FROM EMP
+WHERE DEPTNO=(select DEPTNO FROM DEPT WHERE DNAME='OPERATIONS') AND HIREDATE<(SELECT HIREDATE FROM EMP WHERE ENAME='KING') ;
+
+
+
+-- Q41 
+select ename
+from emp
+where sal=(select max(sal) from emp);
+
+-- Q42 
+select ename
+from emp
+where sal=(select mIN(sal) from emp);
+
+-- Q43 
+select ename, HIREDATE
+from emp
+where HIREDATE=(select MIN(HIREDATE) from emp);
+
+-- Q44
+select ename, HIREDATE
+from emp
+where HIREDATE=(select MAX(HIREDATE) from emp);
+
+-- Q45
+SELECT ENAME, COMM 
+FROM EMP
+WHERE COMM=(SELECT MIN(COMM) FROM EMP);
+
+-- Q46
+SELECT ENAME,SAL, COMM 
+FROM EMP
+WHERE COMM=(SELECT MAX(COMM) FROM EMP);
+
+-- Q47
+SELECT *
+FROM EMP
+WHERE EMPNO=(SELECT MAX(EMPNO) FROM EMP);
+
+-- Q48
+select *
+from emp
+where HIREDATE=(select MIN(HIREDATE) from emp);
+
+-- Q49
+select *, SAL*12 AS ANNUALSAL
+from emp
+where SAL*12=(select MIN(SAL*12) from emp);
+
+-- Q50
+select ename, sal, sal*12 as annualSal
+from emp 
+where sal*12>(select max(sal*12) from emp where job='salesman');
