@@ -212,3 +212,11 @@ where SAL*12=(select MIN(SAL*12) from emp);
 select ename, sal, sal*12 as annualSal
 from emp 
 where sal*12>(select max(sal*12) from emp where job='salesman');
+
+-- ================= Subquery Operator========================
+
+-- ================= ALL Operator ============================
+
+select ename
+from emp
+where sal> all(select sal from emp where deptno in(30));
