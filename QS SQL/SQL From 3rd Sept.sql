@@ -16,22 +16,23 @@ CREATE TABLE EMP (
 -- ============================================================
 
 INSERT INTO EMP (EMPNO, ENAME, JOB, MGR, HIREDATE, SAL, COMM, DEPTNO) VALUES
-(1001, 'SMITH',    'CLERK',        7902, '2022-12-17', 800,  NULL, 20),
-(1002, 'ALLEN',    'SALESMAN',     7698, '2023-02-20', 1600, 300,  30),
-(1003, 'WARD',     'SALESMAN',     7698, '2023-02-22', 1250, 500,  30),
-(1004, 'JONES',    'MANAGER',      7839, '2021-04-02', 2975, NULL, 20),
-(1005, 'MARTIN',   'SALESMAN',     7698, '2022-09-28', 1250, 1400, 30),
-(1006, 'BLAKE',    'MANAGER',      7839, '2021-05-01', 2850, NULL, 30),
-(1007, 'CLARK',    'MANAGER',      7839, '2020-06-09', 2450, NULL, 10),
-(1008, 'SCOTT',    'ANALYST',      7566, '2023-04-19', 3000, NULL, 20),
-(1009, 'KING',     'PRESIDENT',    NULL, '2019-11-17', 5000, NULL, 10),
-(1010, 'TURNER',   'SALESMAN',     7698, '2023-09-08', 1500, 0,    30),
-(1011, 'ADAMS',    'CLERK',        7788, '2024-05-23', 1100, NULL, 20),
-(1012, 'JAMES',    'CLERK',        7698, '2022-12-03', 950,  NULL, 30),
-(1013, 'FORD',     'ANALYST',      7566, '2021-12-03', 3000, NULL, 20),
-(1014, 'MILLER',   'CLERK',        7782, '2023-01-23', 1300, NULL, 10);
+(7369, 'SMITH',    'CLERK',        7902, '2022-12-17', 800,  NULL, 20),
+(7499, 'ALLEN',    'SALESMAN',     7698, '2023-02-20', 1600, 300,  30),
+(7521, 'WARD',     'SALESMAN',     7698, '2023-02-22', 1250, 500,  30),
+(7566, 'JONES',    'MANAGER',      7839, '2021-04-02', 2975, NULL, 20),
+(7654, 'MARTIN',   'SALESMAN',     7698, '2022-09-28', 1250, 1400, 30),
+(7698, 'BLAKE',    'MANAGER',      7839, '2021-05-01', 2850, NULL, 30),
+(7782, 'CLARK',    'MANAGER',      7839, '2020-06-09', 2450, NULL, 10),
+(7788, 'SCOTT',    'ANALYST',      7566, '2023-04-19', 3000, NULL, 20),
+(7839, 'KING',     'PRESIDENT',    NULL, '2019-11-17', 5000, NULL, 10),
+(7844, 'TURNER',   'SALESMAN',     7698, '2023-09-08', 1500, 0,    30),
+(7876, 'ADAMS',    'CLERK',        7788, '2024-05-23', 1100, NULL, 20),
+(7900, 'JAMES',    'CLERK',        7698, '2022-12-03', 950,  NULL, 30),
+(7902, 'FORD',     'ANALYST',      7566, '2021-12-03', 3000, NULL, 20),
+(7934, 'MILLER',   'CLERK',        7782, '2023-01-23', 1300, NULL, 10);
 
 select * from emp;
+DROP TABLE EMP;
 
 -- =============================================
 -- 				GROUP BY
@@ -220,3 +221,131 @@ where sal*12>(select max(sal*12) from emp where job='salesman');
 select ename
 from emp
 where sal> all(select sal from emp where deptno in(30));
+
+
+-- ===========================================================
+-- ==================== NESTED SUBQUERY ======================
+
+-- 61. WAQTD 2ND MINIMUM SALARY.
+SELECT MIN(SAL)
+FROM EMP
+WHERE SAL > (SELECT MIN(SAL)
+             FROM EMP);
+
+
+-- 62. WAQTD 5TH MAXIMUM SALARY.
+SELECT MAX(SAL)
+FROM EMP
+WHERE SAL < (SELECT MAX(SAL)
+             FROM EMP
+             WHERE SAL < (SELECT MAX(SAL)
+                          FROM EMP
+                          WHERE SAL < (SELECT MAX(SAL)
+                                       FROM EMP
+                                       WHERE SAL < (SELECT MAX(SAL)
+                                                    FROM EMP))));
+
+
+-- 63. WAQTD NAME OF THE EMPLOYEE EARNING 3RD MAXIMUM SALARY.
+SELECT ENAME
+FROM EMP
+WHERE SAL = (SELECT MAX(SAL)
+             FROM EMP
+             WHERE SAL < (SELECT MAX(SAL)
+                          FROM EMP
+                          WHERE SAL < (SELECT MAX(SAL)
+                                       FROM EMP)));
+
+
+-- 64. WAQTD EMPNO OF THE EMPLOYEE EARNING 2ND MAXIMUM SALARY.
+SELECT EMPNO
+FROM EMP
+WHERE SAL = (SELECT MAX(SAL)
+             FROM EMP
+             WHERE SAL < (SELECT MAX(SAL)
+                          FROM EMP));
+
+
+-- 65. WAQTD DEPARTMENT NAME OF AN EMPLOYEE GETTING 4TH MAXIMUM SALARY.
+SELECT DNAME
+FROM DEPT
+WHERE DEPTNO = (SELECT DEPTNO
+                FROM EMP
+                WHERE SAL = (SELECT MAX(SAL)
+                             FROM EMP
+                             WHERE SAL < (SELECT MAX(SAL)
+                                          FROM EMP
+                                          WHERE SAL < (SELECT MAX(SAL)
+                                                       FROM EMP
+                                                       WHERE SAL < (SELECT MAX(SAL)
+                                                                    FROM EMP)))));
+
+
+-- 66. WAQTD DETAILS OF THE EMPLOYEE WHO WAS HIRED 2ND.
+SELECT *
+FROM EMP
+WHERE HIREDATE = (SELECT MIN(HIREDATE)
+                  FROM EMP
+                  WHERE HIREDATE > (SELECT MIN(HIREDATE)
+                                    FROM EMP));
+
+
+-- 67. WAQTD NAME OF THE EMPLOYEE HIRED BEFORE THE LAST EMPLOYEE.
+SELECT ENAME
+FROM EMP
+WHERE HIREDATE = (SELECT MAX(HIREDATE)
+                  FROM EMP
+                  WHERE HIREDATE < (SELECT MAX(HIREDATE)
+                                    FROM EMP));
+
+
+-- 68. WAQTD LOCATION OF THE EMPLOYEE WHO WAS HIRED FIRST.
+SELECT LOC
+FROM DEPT
+WHERE DEPTNO = (SELECT DEPTNO
+                FROM EMP
+                WHERE HIREDATE = (SELECT MIN(HIREDATE)
+                                  FROM EMP));
+
+
+-- 69. WAQTD DETAILS OF THE EMPLOYEE EARNING 7TH MINIMUM SALARY.
+SELECT *
+FROM EMP
+WHERE SAL = (SELECT MIN(SAL)
+             FROM EMP
+             WHERE SAL > (SELECT MIN(SAL)
+                          FROM EMP
+                          WHERE SAL > (SELECT MIN(SAL)
+                                       FROM EMP
+                                       WHERE SAL > (SELECT MIN(SAL)
+                                                    FROM EMP
+                                                    WHERE SAL > (SELECT MIN(SAL)
+                                                                 FROM EMP
+                                                                 WHERE SAL > (SELECT MIN(SAL)
+                                                                              FROM EMP
+                                                                              WHERE SAL > (SELECT MIN(SAL)
+                                                                                           FROM EMP)))))));
+
+
+-- 70. WAQTD NAME OF EMPLOYEE GETTING 2ND MAXIMUM SALARY.
+SELECT ENAME
+FROM EMP
+WHERE SAL = (SELECT MAX(SAL)
+             FROM EMP
+             WHERE SAL < (SELECT MAX(SAL)
+                          FROM EMP));
+                          
+-- ===================================================
+-- ========== EMPLOYEE MANAGER RELATIION==============
+-- ===================================================
+select ENAME
+from EMP
+where EMPNO = (select mgr from emp where ename='smith');
+
+SELECT ENAME 
+FROM EMP
+WHERE MGR = (SELECT EMPNO FROM EMP WHERE ENAME='FORD');
+
+select ENAME
+from EMP
+where EMPNO = (select mgr from emp where (select mgr from emp where ename='adam'));
