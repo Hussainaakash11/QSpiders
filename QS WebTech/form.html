@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Form</title>
+</head>
+
+<body>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+
+        form {
+            max-width: 400px;
+            margin: auto;
+            padding: 20px;
+            border: 3px solid #df1e1e;
+            border-radius: 5px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 5px;
+        }
+
+        input[type="text"],
+        input[type="email"],
+        input[type="password"],
+        input[type="date"],
+        input[type="file"],
+        input[type="tel"],
+        input[type="hidden"] {
+            width: 100%;
+            padding: 8px;
+            margin-bottom: 10px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+
+        select ,textarea{
+            width: 100%;
+            padding: 8px;
+            margin-bottom: 10px;
+            border: 2px solid #000000;
+            border-radius: 4px;
+        }
+        input[type="range"] {
+            width: 100%;
+            padding: 8px;
+            margin-bottom: 10px;
+            border: 2px solid #000000;
+            border-radius: 4px;
+        }
+
+        input[type="submit"] {
+            background-color: #4CAF50;
+            color: white;
+            padding: 10px 15px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+
+        input[type="submit"]:hover {
+            background-color: #45a049;
+        }
+        button {
+            background-color: #4CAF50;
+            color: white;
+            padding: 10px 15px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #45a049;
+        }
+    </style>
+
+    <form action="#">
+        <h2>Registration Form</h2>
+        <label for="name">Name:</label>
+        <input type="text" id="name" name="name" required>
+
+        <br><br>
+
+        <label for="profile">Profile:</label>
+        <input type="file" id="profile" name="profile" accept="image/*">
+
+        <br><br>
+
+        <label for="email">Email:</label>
+        <input type="email" id="email" name="email" required>
+
+        <br><br>
+
+        <label for="password">Password:</label>
+        <input type="password" id="password" name="password" required>
+
+        <br><br>
+
+        <label for="date">Date of Birth:</label>
+        <input type="date" id="date" name="date" required>
+
+        <br><br>
+
+        <label for="contact">Contact Number:</label>
+        <input type="tel" id="contact" name="contact" required>
+
+        <br><br>
+
+        <label for="address">Address:</label>
+        <input type="text" id="address" name="address" required>
+
+        <br><br>
+
+        <label for="gender">Gender:</label>
+        <input type="radio" id="male" name="gender" value="male" required>
+        Male
+        <input type="radio" id="female" name="gender" value="female" required>
+        Female
+        <input type="radio" id="other" name="gender" value="other" required>
+        Other
+
+        <br><br>
+        <label for="hobbies">Hobbies:</label>
+        <input type="checkbox" id="reading" name="hobbies" value="reading">
+        Reading
+        <input type="checkbox" id="traveling" name="hobbies" value="traveling">
+        Traveling
+        <input type="checkbox" id="gaming" name="hobbies" value="gaming">
+        Gaming
+        <input type="checkbox" id="sports" name="hobbies" value="sports">
+        Sports
+
+        <br><br>
+
+        <label for="color">Favorite Color:</label>
+        <input type="color" id="color" name="color">
+
+        <br><br>
+
+        <label for="Secret">Hidden Field:</label>
+        <input type="hidden" id="Secret" name="hidden" value="NameIsHidden">
+
+        <br><br>
+
+        <label for="country">Country:</label>
+        <select name="country" id="country">
+            <option value="">Select a country</option>
+            <option value="In">India</option>
+            <option value="us">United States</option>
+            <option value="uk">United Kingdom</option>
+            <option value="ca">Canada</option>
+            <option value="au">Australia</option>
+        </select>
+
+        <br><br>
+
+        <label for="range">Age:</label>
+        <input type="range" id="range" name="range" min="1" max="100">
+
+        <br><br>
+        <label for="Feedback">FeedBack:</label>
+        <textarea name="Feedback" id="Feedback"></textarea>
+        <br><br>
+
+        <button type="submit">Submit</button>
+
+        <br><br>
+        <button type="reset">Reset</button>
+
+
+    </form>
+
+</body>
+
+</html>
