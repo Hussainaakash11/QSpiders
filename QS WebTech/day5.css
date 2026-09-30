@@ -1,3 +1,6 @@
+body {
+    background-color: azure;
+}
 h1 {
     
     color: blue;
@@ -11,4 +14,11 @@ h2 {
     border: 1px solid rgb(47, 6, 6);
     border-radius: 10%;
     background-color: violet;
+}
+h3 {
+background-color: beige;
+font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+color: brown;
+border: 2px solid green;
+border-radius: 10%;
 }
