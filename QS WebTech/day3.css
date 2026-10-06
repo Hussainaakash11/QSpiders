@@ -1,0 +1,52 @@
+h1{
+    color: blue;
+}
+h1:hover {
+  color: red;
+} */
+ol{
+    color: green;
+}
+ol li:hover {
+    color: orange;
+} 
+a{
+    color:black;
+}
+a:hover{
+    color: red;
+}
+a::before{
+    content: '*';
+    color: blueviolet;
+}
+a::after{
+    content: '%';
+    color:blanchedalmond;
+}
+
+
+
+
+li:first-child{
+    color:pink;
+}
+li:last-child{
+    color:blueviolet
+}
+li:nth-child(7){
+    color:rgb(42, 165, 63);
+}
+pre::first-letter{
+    color:blue;
+}
+pre::first-line{
+    color:red;
+}
+pre::selection{
+    color:white;
+    background:red;
+}
+input::placeholder{
+    color:green;
+}
