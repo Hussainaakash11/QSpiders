@@ -1,4 +1,9 @@
-i=1
-while i<=4:
-    print(i)
-    i+=1
+def demo():
+    print(10)
+
+def main():
+    return 10
+
+# var=demo()
+# print(var)
+main()
