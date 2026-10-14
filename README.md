@@ -80,7 +80,7 @@ Learning is a journey, not a destination. Every lecture, every exercise, and eve
 
 ---
 
-**Last Updated:** August 14, 2026  
+**Last Updated:** 15 Oct, 2026  
 **Status:** 📚 Actively Learning
 
 ---
