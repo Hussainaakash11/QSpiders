@@ -62,12 +62,12 @@ nav a:hover {
     border-radius: 6px;
 }
 
-.courses {
+#courses {
     text-align: center;
     padding: 50px 20px;
 }
 
-.courses h2 {
+#courses h2 {
     font-size: 36px;
     margin-bottom: 30px;
     color: #086288;
