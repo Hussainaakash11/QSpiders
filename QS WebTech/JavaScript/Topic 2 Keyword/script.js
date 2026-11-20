@@ -93,6 +93,7 @@ console.log(x==y);
 
 //  ? Strict Equality Operator (===)
 //  ? Strict Equality Operator (===) : It checks both the value and the data type.
+/** 
 const a = 10;
 const b = "10";
 console.log(a===b);
@@ -103,4 +104,66 @@ console.log(i===j);
 
 const x="10";
 const y=5 ;
-console.log(x===y);
+console.log(x===y); 
+*/
+
+/*
+// Date 20th November 2026
+
+// Logical AND 
+
+console.log(3 && 4) // 4
+console.log(3 && 0) // 0
+console.log("hello" && "AK") // "AK"
+
+// Logical OR
+
+console.log(3 || 4) // 3
+console.log(3 || 0) // 3
+console.log("hello" || "AK") // "hello"
+console.log(0 || null) // null
+console.log(undefined || 0.0 ) // 0.0
+console.log(0 || false) // false
+console.log(0 || NaN) // NaN
+console.log(0 || "") // ""
+
+*/
+// != Loose Inequality Operator vs !== Strict Inequality Operator
+/*
+// Loose Inequality
+const a = 10;
+const b = "10";
+console.log(a!=b); // false
+
+const i= 10;
+const j = "10";
+console.log(i!==j); // True
+
+console.log(false != false); // false
+
+console.log('@' != '#') // true
+
+console.log(NaN != NaN)
+
+const x= 10 - "m";
+const y = 10 - "m";
+console.log(x != y); // true
+*/ 
+
+// Strict Inequality Operator (!==):
+
+/*
+const i= 10;
+const j = "10";
+console.log(i!==j); // True
+
+console.log(false !== false); // false
+
+console.log('@' !== '#') // true
+
+console.log(NaN !== NaN) // true
+
+const x= 10 - "m";
+const y = 10 - "m";
+console.log(x !== y); // true
+*/
