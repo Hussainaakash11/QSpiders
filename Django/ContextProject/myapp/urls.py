@@ -4,6 +4,6 @@ from myapp import views
 urlpatterns = [
     
     # routes for Trainer App
-    path('home/',views.home_view),
+    path('std/',views.student_view),
 
 ]
