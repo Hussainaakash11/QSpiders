@@ -108,7 +108,7 @@ console.log(x===y);
 */
 
 /*
-// Date 20th November 2026
+// Date 19th November 2026
 
 // Logical AND 
 
@@ -167,3 +167,25 @@ const x= 10 - "m";
 const y = 10 - "m";
 console.log(x !== y); // true
 */
+
+// Date 20th November 2026 
+
+// Lecxical Environment and Scope
+
+/**
+console.log("Start of the program");
+var a = 10;
+let b = 20;
+const c = 30;
+{
+    var a = 100;
+    let b = 200;
+    const c = 300;
+    var d = 400;
+    console.log("Inside the block");
+    console.log(a, b, c, d);
+}
+console.log("Outside the block");
+console.log(a, b, c, d);
+console.log("End of the program");
+ */
