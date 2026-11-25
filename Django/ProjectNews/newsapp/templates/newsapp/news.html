@@ -1,11 +1,40 @@
+{% load static %}
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>News Page</title>
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
 </head>
 <body>
-    <h1>This is news page</h1>
+    <h1 style="text-align: center;">This is News page</h1>
+    <hr>
+    <h2 style="background-color: red;"><marquee behavior="scroll" direction="right">Breaking News..!!!</marquee></h2>
+    <h1>Today's {{ type }} Headline</h1>
+    
+    <ul>
+        <li><p>{{ msg1 }}</p></li>
+        <li><p>{{ msg2 }}</p></li>
+        <li><p>{{ msg3 }}</p></li>
+    </ul>
+
+    {% if type == 'sports' %}
+        <img src="{% static 'images/sports.jpg' %}" alt="img1">
+        <img src="{% static 'images/sports2.webp' %}" alt="img2">
+        <img src="{% static 'images/sports3.webp' %}" alt="img3">
+    {% elif type == 'business' %}
+        <img src="{% static 'images/b1.jpg' %}" alt="img1">
+        <img src="{% static 'images/b2.jpg' %}" alt="img2">
+        <img src="{% static 'images/b3.jpg' %}" alt="img3">
+    {% elif type == 'entertainment' %}
+        <img src="{% static 'images/entertainment.png' %}" alt="img1">
+        <img src="{% static 'images/entertainment2.avif' %}" alt="img2">
+        <img src="{% static 'images/entertainment3.avif' %}" alt="img3">
+    {% endif %}
+
+    <ul>
+        <li><h3><a href="/newsapp/home/">Home Page</a></h3></li>
+    </ul>
 </body>
 </html>
