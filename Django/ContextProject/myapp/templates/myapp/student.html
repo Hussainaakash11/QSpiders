@@ -9,8 +9,17 @@
 </head>
 <body>
    <center> <h1>This is Conext</h1></center>
-   <h2>The Name is: {{name}}</h2>
-   <h2>The Subject is: {{subject}}</h2>
-   <h2>The Marks are: {{marks}} </h2>
+   <h1>Student Data</h1>
+   <hr>
+   {% if data%}
+   {% for i in data %}
+    <h1>Name: {{i.name}}</h1>
+    <h1>Subject: {{i.subject}}</h1>
+    <h1>Marks: {{i.marks}}</h1>
+    <hr>
+    {% endfor %}
+    {%else%}
+    <h1>Data is not present</h1>
+    {% endif %}
 </body>
 </html>
