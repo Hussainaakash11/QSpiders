@@ -2,11 +2,9 @@ from django.urls import path
 from newsapp import views 
 
 urlpatterns = [
-    
-    # routes for Trainer App
-    path('home/',views.home_view),
-    path('business/',views.business_view),
-    path('sports/',views.sports_view),
-    path('entertainment/',views.entertainment_view),
-
+    path('', views.home_view, name='home_index'),
+    path('home/', views.home_view, name='home'),
+    path('business/', views.business_view, name='business'),
+    path('sports/', views.sports_view, name='sports'),
+    path('entertainment/', views.entertainment_view, name='entertainment'),
 ]

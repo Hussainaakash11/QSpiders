@@ -1,40 +1,209 @@
+{% extends "newsapp/base.html" %}
 {% load static %}
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>News Page</title>
-    <link rel="stylesheet" href="{% static 'css/style.css' %}">
-</head>
-<body>
-    <h1 style="text-align: center;">This is News page</h1>
-    <hr>
-    <h2 style="background-color: red;"><marquee behavior="scroll" direction="right">Breaking News..!!!</marquee></h2>
-    <h1>Today's {{ type }} Headline</h1>
-    
-    <ul>
-        <li><p>{{ msg1 }}</p></li>
-        <li><p>{{ msg2 }}</p></li>
-        <li><p>{{ msg3 }}</p></li>
-    </ul>
 
-    {% if type == 'sports' %}
-        <img src="{% static 'images/sports.jpg' %}" alt="img1">
-        <img src="{% static 'images/sports2.webp' %}" alt="img2">
-        <img src="{% static 'images/sports3.webp' %}" alt="img3">
-    {% elif type == 'business' %}
-        <img src="{% static 'images/b1.jpg' %}" alt="img1">
-        <img src="{% static 'images/b2.jpg' %}" alt="img2">
-        <img src="{% static 'images/b3.jpg' %}" alt="img3">
-    {% elif type == 'entertainment' %}
-        <img src="{% static 'images/entertainment.png' %}" alt="img1">
-        <img src="{% static 'images/entertainment2.avif' %}" alt="img2">
-        <img src="{% static 'images/entertainment3.avif' %}" alt="img3">
-    {% endif %}
+{% block content %}
+<div class="news-category-page">
+    <!-- Breadcrumbs & Category Header -->
+    <div class="category-header category-header-{{ type }}">
+        <div class="category-header-inner">
+            <div class="breadcrumbs">
+                <a href="{% url 'home' %}" class="breadcrumb-item">Home</a>
+                <span class="breadcrumb-sep">/</span>
+                <span class="breadcrumb-current">{{ type|title }}</span>
+            </div>
+            
+            <div class="category-title-wrap">
+                <span class="category-badge-pill badge-{{ type }}">{{ type|upper }} DESK</span>
+                <!-- Retaining exact text required by QSpiders curriculum: "Today's {{ type }} Headline" and "This is News page" -->
+                <span class="badge-accent">This is News page</span>
+                <h1 class="category-main-title">Today's {{ type|title }} Headline</h1>
+                <p class="category-tagline">{{ tagline|default:"The latest breaking coverage and exclusive reports from Asatya Tak." }}</p>
+            </div>
+        </div>
+    </div>
 
-    <ul>
-        <li><h3><a href="/newsapp/home/">Home Page</a></h3></li>
-    </ul>
-</body>
-</html>
+    <!-- Main Content Layout with 2-Column Grid -->
+    <div class="news-layout-grid">
+        <!-- Main Column: Lead Article + Story Stream -->
+        <div class="news-main-column">
+            
+            <!-- Lead Featured Headline Card (msg1) -->
+            <article class="featured-story-card card-{{ type }}">
+                <div class="featured-image-container">
+                    {% if type == 'sports' %}
+                        <img src="{% static 'images/sports.jpg' %}" alt="Sports Headline" class="featured-img">
+                    {% elif type == 'business' %}
+                        <img src="{% static 'images/b1.jpg' %}" alt="Business Headline" class="featured-img">
+                    {% elif type == 'entertainment' %}
+                        <img src="{% static 'images/entertainment.png' %}" alt="Entertainment Headline" class="featured-img">
+                    {% endif %}
+                    <span class="featured-ribbon">⭐ TOP HEADLINE</span>
+                </div>
+
+                <div class="featured-content">
+                    <div class="article-meta">
+                        <span class="meta-badge badge-{{ type }}">{{ type|title }}</span>
+                        <span class="meta-dot">•</span>
+                        <span class="meta-item">📅 25 Nov 2026</span>
+                        <span class="meta-dot">•</span>
+                        <span class="meta-item">⏱️ 4 min read</span>
+                    </div>
+
+                    <!-- msg1 Headline -->
+                    <h2 class="featured-headline">{{ msg1 }}</h2>
+
+                    <p class="featured-summary">
+                        {% if type == 'business' %}
+                            Nvidia CEO Jensen Huang opened up during an off-the-record briefing about the psychological strains of leading a trillion-dollar chip giant through dramatic market oscillations. Wall Street investors responded with mixed emotions while tech analysts dissected the rare emotional disclosure.
+                        {% elif type == 'sports' %}
+                            In an astonishing display of youthful dominance, the 14-year-old Indian cricket sensation rewritten junior international record books by hammering an unbeaten 204 runs off merely 53 deliveries against the UAE squad, featuring 21 sixes and 18 boundaries.
+                        {% elif type == 'entertainment' %}
+                            The highly anticipated digital streaming series reuniting Fawad Khan and Mahira Khan has triggered sharp reactions across film associations in India. The All India Cine Workers Association (AICWA) has submitted a formal appeal requesting restrictions on its upcoming December 4 premiere.
+                        {% endif %}
+                    </p>
+
+                    <div class="featured-footer">
+                        <div class="author-info">
+                            <div class="author-avatar">{{ type|first|upper }}</div>
+                            <div class="author-text">
+                                <span class="author-name">Asatya Tak Senior Bureau</span>
+                                <span class="author-role">Special Investigation Unit</span>
+                            </div>
+                        </div>
+                        <div class="share-actions">
+                            <button class="btn-icon" title="Share story" onclick="navigator.clipboard?.writeText(window.location.href); alert('Story link copied!');">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="18" cy="5" r="3"></circle><circle cx="6" cy="12" r="3"></circle><circle cx="18" cy="19" r="3"></circle><line x1="8.59" y1="13.51" x2="15.42" y2="17.49"></line><line x1="15.41" y1="6.51" x2="8.59" y2="10.49"></line></svg>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </article>
+
+            <!-- Secondary Headlines Grid (msg2 and msg3) -->
+            <div class="secondary-stories-section">
+                <h3 class="secondary-section-title">More {{ type|title }} Dispatches</h3>
+
+                <div class="secondary-grid">
+                    <!-- Article 2 (msg2) -->
+                    <article class="secondary-story-card">
+                        <div class="secondary-img-wrap">
+                            {% if type == 'sports' %}
+                                <img src="{% static 'images/sports2.webp' %}" alt="Sports News 2" class="secondary-img">
+                            {% elif type == 'business' %}
+                                <img src="{% static 'images/b2.jpg' %}" alt="Business News 2" class="secondary-img">
+                            {% elif type == 'entertainment' %}
+                                <img src="{% static 'images/entertainment2.avif' %}" alt="Entertainment News 2" class="secondary-img">
+                            {% endif %}
+                            <span class="secondary-badge badge-{{ type }}">Scoop #2</span>
+                        </div>
+                        <div class="secondary-card-content">
+                            <div class="article-meta">
+                                <span class="meta-item">📅 24 Nov 2026</span>
+                                <span class="meta-dot">•</span>
+                                <span class="meta-item">⏱️ 3 min</span>
+                            </div>
+                            <!-- msg2 Headline -->
+                            <h4 class="secondary-headline">{{ msg2 }}</h4>
+                            <p class="secondary-excerpt">
+                                {% if type == 'business' %}
+                                    Leaked internal documents confirm unprecedented executive meetings following widespread cloud outages across enterprise accounts worldwide.
+                                {% elif type == 'sports' %}
+                                    Franchise scouts and cricket strategists gear up for record-breaking bids as England star enters auction pool alongside twelve Bangladesh players.
+                                {% elif type == 'entertainment' %}
+                                    Michael B Jordan delivered a heartfelt recorded address praising Indian cinematic heritage while accepting his honorary award in Mumbai.
+                                {% endif %}
+                            </p>
+                        </div>
+                    </article>
+
+                    <!-- Article 3 (msg3) -->
+                    <article class="secondary-story-card">
+                        <div class="secondary-img-wrap">
+                            {% if type == 'sports' %}
+                                <img src="{% static 'images/sports3.webp' %}" alt="Sports News 3" class="secondary-img">
+                            {% elif type == 'business' %}
+                                <img src="{% static 'images/b3.jpg' %}" alt="Business News 3" class="secondary-img">
+                            {% elif type == 'entertainment' %}
+                                <img src="{% static 'images/entertainment3.avif' %}" alt="Entertainment News 3" class="secondary-img">
+                            {% endif %}
+                            <span class="secondary-badge badge-{{ type }}">Scoop #3</span>
+                        </div>
+                        <div class="secondary-card-content">
+                            <div class="article-meta">
+                                <span class="meta-item">📅 Recent Dispatch</span>
+                                <span class="meta-dot">•</span>
+                                <span class="meta-item">⏱️ 5 min</span>
+                            </div>
+                            <!-- msg3 Headline -->
+                            <h4 class="secondary-headline">{{ msg3 }}</h4>
+                            <p class="secondary-excerpt">
+                                {% if type == 'business' %}
+                                    International trade delegates and supply chain executives monitor developments closely as US trade officials prepare comprehensive tariff proposals.
+                                {% elif type == 'sports' %}
+                                    Millions of cricket aficionados worldwide celebrate the iconic legacy, composure, and unmatched trophies of Captain Cool as he formally retires.
+                                {% elif type == 'entertainment' %}
+                                    Denis Villeneuve's sci-fi epic captures prestigious Academy nominations across direction, cinematography, visual effects, and music score.
+                                {% endif %}
+                            </p>
+                        </div>
+                    </article>
+                </div>
+            </div>
+
+            <!-- Navigation Back to Home Button -->
+            <div class="bottom-nav-box">
+                <a href="{% url 'home' %}" class="btn btn-outline-home">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="btn-icon-svg"><line x1="19" y1="12" x2="5" y2="12"></line><polyline points="12 19 5 12 12 5"></polyline></svg>
+                    Return to Home Page
+                </a>
+            </div>
+        </div>
+
+        <!-- Right Sidebar: Quick Navigation & Trending -->
+        <aside class="news-sidebar">
+            <!-- Channel Switcher Widget -->
+            <div class="sidebar-widget channel-switcher-widget">
+                <h4 class="widget-title">Explore Other Desks</h4>
+                <div class="widget-channels-list">
+                    <a href="{% url 'business' %}" class="widget-channel-item {% if type == 'business' %}active-channel{% endif %}">
+                        <span class="channel-dot dot-business"></span>
+                        <div class="channel-info">
+                            <span class="channel-name">Business Desk</span>
+                            <span class="channel-sub">Tech, Markets & Economy</span>
+                        </div>
+                        <span class="channel-arrow">→</span>
+                    </a>
+
+                    <a href="{% url 'sports' %}" class="widget-channel-item {% if type == 'sports' %}active-channel{% endif %}">
+                        <span class="channel-dot dot-sports"></span>
+                        <div class="channel-info">
+                            <span class="channel-name">Sports Desk</span>
+                            <span class="channel-sub">Cricket, IPL & Matches</span>
+                        </div>
+                        <span class="channel-arrow">→</span>
+                    </a>
+
+                    <a href="{% url 'entertainment' %}" class="widget-channel-item {% if type == 'entertainment' %}active-channel{% endif %}">
+                        <span class="channel-dot dot-entertainment"></span>
+                        <div class="channel-info">
+                            <span class="channel-name">Entertainment Desk</span>
+                            <span class="channel-sub">Cinema, OTT & Oscars</span>
+                        </div>
+                        <span class="channel-arrow">→</span>
+                    </a>
+                </div>
+            </div>
+
+            <!-- Asatya Tak Trust Card -->
+            <div class="sidebar-widget satire-guarantee-widget">
+                <div class="satire-badge-icon">🎭</div>
+                <h4 class="satire-title">Asatya Tak Guarantee</h4>
+                <p class="satire-text">
+                    "Ye hai Joot ki Duniya" — Proudly bringing you the most sensational, fabricated, and entertaining stories on the web.
+                </p>
+                <div class="disclaimer-stamp">100% UNVERIFIED • 100% FUN</div>
+            </div>
+        </aside>
+    </div>
+</div>
+{% endblock %}

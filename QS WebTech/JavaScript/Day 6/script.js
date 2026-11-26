@@ -28,9 +28,14 @@ function greetUser(name = "user") {
 const multiplication = function prod(i, j) {
   return i * j;
 };
-console.log(multiplication(5, 9));
+// console.log(multiplication(5, 9));
 
 const addition = function(i, j) {
   return i + j;
 };
-console.log(addition(5, 9));
+// console.log(addition(5, 9));
+
+const hii = function(){
+  console.log("Hii Aakash")
+}
+hii()

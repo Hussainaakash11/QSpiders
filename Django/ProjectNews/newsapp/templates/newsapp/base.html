@@ -1,0 +1,195 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ page_title|default:"Asatya Tak - Yeh Hai Jhooth Ki Duniya" }}</title>
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Lora:ital,wght@0,500;0,600;1,400&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+</head>
+<body>
+    <!-- Top Utility Bar -->
+    <div class="top-bar">
+        <div class="container top-bar-content">
+            <div class="top-bar-left">
+                <span class="live-pulse"><span class="dot"></span> LIVE BROADCAST</span>
+                <span class="separator">|</span>
+                <span id="live-datetime" class="live-datetime">Wednesday, 25 Nov 2026</span>
+                <span class="separator">|</span>
+                <span class="top-tagline">Yeh Hai Jhooth Ki Duniya</span>
+            </div>
+            <div class="top-bar-right">
+                <span class="weather-badge">🌤️ New Delhi 26°C</span>
+                <span class="edition-badge">Hindi / English Edition</span>
+            </div>
+        </div>
+    </div>
+
+    <!-- Main Header -->
+    <header class="main-header">
+        <div class="container header-content">
+            <div class="brand-wrapper">
+                <a href="{% url 'home' %}" class="brand-link">
+                    <img src="{% static 'images/logo.png' %}" alt="Asatya Tak Logo" class="brand-logo">
+                    <div class="brand-text">
+                        <span class="brand-title">ASATYA <span class="highlight">TAK</span></span>
+                        <span class="brand-motto">YEH HAI JHOOTH KI DUNIYA</span>
+                    </div>
+                </a>
+            </div>
+
+            <div class="header-banner">
+                <div class="header-satire-badge">
+                    <span class="badge-pill">PARODY NEWS NETWORK</span>
+                    <p class="badge-text">India's Most Entertaining Satirical News Desk</p>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Navigation Bar -->
+    <nav class="navbar">
+        <div class="container nav-container">
+            <ul class="nav-links">
+                <li class="nav-item {% if active_tab == 'home' %}active{% endif %}">
+                    <a href="{% url 'home' %}" class="nav-link">
+                        <svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path><polyline points="9 22 9 12 15 12 15 22"></polyline></svg>
+                        Home
+                    </a>
+                </li>
+                <li class="nav-item {% if active_tab == 'business' %}active{% endif %}">
+                    <a href="{% url 'business' %}" class="nav-link">
+                        <svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="12" y1="1" x2="12" y2="23"></line><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"></path></svg>
+                        Business
+                    </a>
+                </li>
+                <li class="nav-item {% if active_tab == 'sports' %}active{% endif %}">
+                    <a href="{% url 'sports' %}" class="nav-link">
+                        <svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"></circle><path d="M4.93 4.93l4.24 4.24"></path><path d="M14.83 14.83l4.24 4.24"></path><path d="M14.83 9.17l4.24-4.24"></path><path d="M4.93 19.07l4.24-4.24"></path></svg>
+                        Sports
+                    </a>
+                </li>
+                <li class="nav-item {% if active_tab == 'entertainment' %}active{% endif %}">
+                    <a href="{% url 'entertainment' %}" class="nav-link">
+                        <svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="2" width="20" height="20" rx="2.18" ry="2.18"></rect><line x1="7" y1="2" x2="7" y2="22"></line><line x1="17" y1="2" x2="17" y2="22"></line><line x1="2" y1="12" x2="22" y2="12"></line><line x1="2" y1="7" x2="7" y2="7"></line><line x1="2" y1="17" x2="7" y2="17"></line><line x1="17" y1="17" x2="22" y2="17"></line><line x1="17" y1="7" x2="22" y2="7"></line></svg>
+                        Entertainment
+                    </a>
+                </li>
+            </ul>
+
+            <div class="nav-right">
+                <div class="search-box">
+                    <svg class="search-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
+                    <input type="text" placeholder="Search rumors, scoops..." class="search-input">
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Breaking News Ticker -->
+    <div class="ticker-wrapper">
+        <div class="container ticker-container">
+            <div class="ticker-label">
+                <span class="ticker-icon">⚡</span>
+                <span class="ticker-text">BREAKING NEWS</span>
+            </div>
+            <div class="ticker-scroll-area">
+                <div class="ticker-track">
+                    {% if ticker_items %}
+                        {% for item in ticker_items %}
+                            <span class="ticker-item"><span class="bullet">•</span> {{ item }}</span>
+                        {% endfor %}
+                    {% else %}
+                        <span class="ticker-item"><span class="bullet">•</span> ASATYA TAK: Ye hai Joot ki Duniya - India's Most Unfiltered Satirical News</span>
+                        <span class="ticker-item"><span class="bullet">•</span> Nvidia's Jensen Huang says he is in therapy as comeback rally fades</span>
+                        <span class="ticker-item"><span class="bullet">•</span> Records tumble as Indian teen Sooryavanshi smashes 53-ball 204 against UAE</span>
+                        <span class="ticker-item"><span class="bullet">•</span> Fawad Khan, Mahira Khan series faces opposition in India</span>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Main Body Container -->
+    <main class="main-content">
+        <div class="container">
+            {% block content %}
+            {% endblock %}
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="main-footer">
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-col brand-col">
+                    <div class="footer-brand">
+                        <img src="{% static 'images/logo.png' %}" alt="Logo" class="footer-logo">
+                        <span class="footer-title">ASATYA TAK</span>
+                    </div>
+                    <p class="footer-desc">
+                        "Ye hai Joot ki Duniya" — Delivering satirical dispatches, hilarious rumors, and unverified scoops with journalistic drama and flair.
+                    </p>
+                    <div class="footer-badge">
+                        <span>⚠️ 100% Satirical Parody Channel</span>
+                    </div>
+                </div>
+
+                <div class="footer-col">
+                    <h4 class="footer-heading">News Channels</h4>
+                    <ul class="footer-links">
+                        <li><a href="{% url 'business' %}">📈 Business & Tech</a></li>
+                        <li><a href="{% url 'sports' %}">🏆 Sports & Cricket</a></li>
+                        <li><a href="{% url 'entertainment' %}">🎬 Movies & OTT</a></li>
+                        <li><a href="{% url 'home' %}">🏠 Front Page</a></li>
+                    </ul>
+                </div>
+
+                <div class="footer-col">
+                    <h4 class="footer-heading">Trending Topics</h4>
+                    <div class="tag-cloud">
+                        <span class="tag">#JensenHuang</span>
+                        <span class="tag">#Sooryavanshi204</span>
+                        <span class="tag">#MSDhoni</span>
+                        <span class="tag">#BenStokesIPL</span>
+                        <span class="tag">#DuneOscars</span>
+                        <span class="tag">#FawadKhan</span>
+                    </div>
+                </div>
+
+                <div class="footer-col">
+                    <h4 class="footer-heading">Parody Newsletter</h4>
+                    <p class="footer-subtext">Get daily dose of fabricated scoops right into your mailbox.</p>
+                    <form class="newsletter-form" onsubmit="event.preventDefault(); alert('Subscribed to Asatya Tak alerts!');">
+                        <input type="email" placeholder="Enter your email" required class="newsletter-input">
+                        <button type="submit" class="newsletter-btn">Join</button>
+                    </form>
+                </div>
+            </div>
+
+            <div class="footer-bottom">
+                <p>&copy; 2026 Asatya Tak News Network. Designed for QSpiders Django Project.</p>
+                <p class="disclaimer">Disclaimer: All contents on this website are for parody and learning purposes.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Simple Dynamic Time Script -->
+    <script>
+        function updateTime() {
+            const timeEl = document.getElementById('live-datetime');
+            if (timeEl) {
+                const now = new Date();
+                const options = { weekday: 'short', day: 'numeric', month: 'short', year: 'numeric', hour: '2-digit', minute: '2-digit' };
+                timeEl.textContent = now.toLocaleDateString('en-GB', options);
+            }
+        }
+        updateTime();
+        setInterval(updateTime, 30000);
+    </script>
+</body>
+</html>

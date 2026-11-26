@@ -1,21 +1,212 @@
+{% extends "newsapp/base.html" %}
 {% load static %}
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Home Page</title>
-    <link rel="stylesheet" href="{% static "css/style.css" %}">
-</head>
-<body>
-    <center><img src="{% static "images/logo.png" %}" alt="logo" class="logo"></center>
-    <h1><center>Welcome to Asatya Tak</center></h1>
-    <h1><marquee behavior="" direction="left">Ye hai Joot ki Duniya</marquee></h1>
 
-    <ul>
-        <li><h3><a href="http://127.0.0.1:8000/newsapp/business/">Business Page</a></h3></li>
-        <li><h3><a href="http://127.0.0.1:8000/newsapp/sports/">Sports Page</a></h3></li>
-        <li><h3><a href="http://127.0.0.1:8000/newsapp/entertainment/">Entertainment Page</a></h3></li>
-    </ul>
-</body>
-</html>
+{% block content %}
+<div class="home-page-wrapper">
+    <!-- Welcome Headline & Parody Marquee Banner -->
+    <div class="welcome-hero-banner">
+        <div class="welcome-content">
+            <span class="sub-badge">THE PARODY NEWS NETWORK</span>
+            <h1 class="welcome-title">Welcome to <span class="gradient-text">Asatya Tak</span></h1>
+            <p class="welcome-tagline">
+                <span class="marquee-bullet">🔴 LIVE:</span> 
+                <strong>Ye hai Joot ki Duniya</strong> — Where facts are optional, drama is guaranteed, and headlines are unverified.
+            </p>
+        </div>
+    </div>
+
+    <!-- Featured Hero Story Grid -->
+    <section class="section hero-story-section">
+        <div class="hero-card-grid">
+            <!-- Lead Big Story -->
+            <div class="lead-hero-card">
+                <div class="hero-image-wrap">
+                    <img src="{% static 'images/b1.jpg' %}" alt="Featured Story" class="hero-img">
+                    <span class="category-badge badge-business">Business Spotlight</span>
+                </div>
+                <div class="hero-details">
+                    <div class="article-meta">
+                        <span class="meta-date">📅 25 Nov 2026</span>
+                        <span class="meta-dot">•</span>
+                        <span class="meta-time">⏱️ 4 min read</span>
+                        <span class="meta-dot">•</span>
+                        <span class="meta-author">✍️ Financial Bureau</span>
+                    </div>
+                    <h2 class="hero-title">
+                        <a href="{% url 'business' %}">Nvidia's Jensen Huang says he is in therapy as comeback rally fades</a>
+                    </h2>
+                    <p class="hero-excerpt">
+                        Semiconductor kingpin shares candid reflections on the emotional rollercoaster of market fluctuations and investor panics. Exclusive satirical insights from the tech boardroom.
+                    </p>
+                    <div class="hero-action">
+                        <a href="{% url 'business' %}" class="btn btn-primary">Read Full Scoop →</a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Side Featured Stories -->
+            <div class="side-hero-column">
+                <div class="section-mini-header">
+                    <h3>⚡ Prime Dispatches</h3>
+                    <span class="pulse-indicator"></span>
+                </div>
+
+                <!-- Mini Story 1: Sports -->
+                <article class="mini-story-card">
+                    <div class="mini-image-wrap">
+                        <img src="{% static 'images/sports.jpg' %}" alt="Sports" class="mini-img">
+                        <span class="category-badge badge-sports">Sports</span>
+                    </div>
+                    <div class="mini-content">
+                        <h4 class="mini-title">
+                            <a href="{% url 'sports' %}">Records tumble as Indian teen Sooryavanshi smashes 53-ball 204 against UAE</a>
+                        </h4>
+                        <div class="mini-meta">
+                            <span>Today</span> • <span>Cricket Bureau</span>
+                        </div>
+                    </div>
+                </article>
+
+                <!-- Mini Story 2: Entertainment -->
+                <article class="mini-story-card">
+                    <div class="mini-image-wrap">
+                        <img src="{% static 'images/entertainment.png' %}" alt="Entertainment" class="mini-img">
+                        <span class="category-badge badge-entertainment">Entertainment</span>
+                    </div>
+                    <div class="mini-content">
+                        <h4 class="mini-title">
+                            <a href="{% url 'entertainment' %}">Pakistani Netflix series starring Fawad Khan, Mahira Khan faces opposition in India</a>
+                        </h4>
+                        <div class="mini-meta">
+                            <span>Today</span> • <span>Cinema Desk</span>
+                        </div>
+                    </div>
+                </article>
+
+                <!-- Mini Story 3: Sports Legend -->
+                <article class="mini-story-card">
+                    <div class="mini-image-wrap">
+                        <img src="{% static 'images/sports3.webp' %}" alt="Dhoni" class="mini-img">
+                        <span class="category-badge badge-sports">Legends</span>
+                    </div>
+                    <div class="mini-content">
+                        <h4 class="mini-title">
+                            <a href="{% url 'sports' %}">Dohni Retired on 19 Nov 2026: The End of an Unmatched Era</a>
+                        </h4>
+                        <div class="mini-meta">
+                            <span>19 Nov 2026</span> • <span>Farewell Tribute</span>
+                        </div>
+                    </div>
+                </article>
+            </div>
+        </div>
+    </section>
+
+    <!-- Channels & Category Navigation Cards -->
+    <section class="section categories-section">
+        <div class="section-header">
+            <div>
+                <span class="section-tag">EXPLORE DESKS</span>
+                <h2 class="section-title">Major News Channels</h2>
+            </div>
+            <p class="section-subtitle">Jump directly into specialized reportage across markets, stadiums, and silver screens.</p>
+        </div>
+
+        <div class="channel-cards-grid">
+            <!-- Business Card -->
+            <div class="channel-card business-card">
+                <div class="channel-card-media">
+                    <img src="{% static 'images/b3.jpg' %}" alt="Business News" class="channel-img">
+                    <div class="channel-overlay"></div>
+                    <div class="channel-badge-top">
+                        <span class="badge-business">Markets & Trade</span>
+                    </div>
+                </div>
+                <div class="channel-card-body">
+                    <div class="channel-icon-wrap icon-business">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="23 6 13.5 15.5 8.5 10.5 1 18"></polyline><polyline points="17 6 23 6 23 12"></polyline></svg>
+                    </div>
+                    <h3 class="channel-title">Business Page</h3>
+                    <p class="channel-desc">
+                        Corporate crises, tariff wars, Silicon Valley meltdowns, and Jensen Huang's therapy sessions.
+                    </p>
+                    <div class="channel-headline-preview">
+                        <strong>Top Story:</strong> "Microsoft declares ‘Code Red’ after historic outage..."
+                    </div>
+                    <a href="{% url 'business' %}" class="btn btn-channel btn-channel-business">Open Business Desk →</a>
+                </div>
+            </div>
+
+            <!-- Sports Card -->
+            <div class="channel-card sports-card">
+                <div class="channel-card-media">
+                    <img src="{% static 'images/sports2.webp' %}" alt="Sports News" class="channel-img">
+                    <div class="channel-overlay"></div>
+                    <div class="channel-badge-top">
+                        <span class="badge-sports">Cricket & IPL</span>
+                    </div>
+                </div>
+                <div class="channel-card-body">
+                    <div class="channel-icon-wrap icon-sports">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"></circle><path d="M4.93 4.93l4.24 4.24"></path><path d="M14.83 14.83l4.24 4.24"></path><path d="M14.83 9.17l4.24-4.24"></path><path d="M4.93 19.07l4.24-4.24"></path></svg>
+                    </div>
+                    <h3 class="channel-title">Sports Page</h3>
+                    <p class="channel-desc">
+                        Record double-centuries, Ben Stokes entering mega auction, and tributes to immortal cricket captains.
+                    </p>
+                    <div class="channel-headline-preview">
+                        <strong>Top Story:</strong> "Records tumble as Indian teen Sooryavanshi smashes 53-ball 204..."
+                    </div>
+                    <a href="{% url 'sports' %}" class="btn btn-channel btn-channel-sports">Open Sports Desk →</a>
+                </div>
+            </div>
+
+            <!-- Entertainment Card -->
+            <div class="channel-card entertainment-card">
+                <div class="channel-card-media">
+                    <img src="{% static 'images/entertainment2.avif' %}" alt="Entertainment News" class="channel-img">
+                    <div class="channel-overlay"></div>
+                    <div class="channel-badge-top">
+                        <span class="badge-entertainment">Cinema & Oscars</span>
+                    </div>
+                </div>
+                <div class="channel-card-body">
+                    <div class="channel-icon-wrap icon-entertainment">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="2" width="20" height="20" rx="2.18" ry="2.18"></rect><line x1="7" y1="2" x2="7" y2="22"></line><line x1="17" y1="2" x2="17" y2="22"></line><line x1="2" y1="12" x2="22" y2="12"></line><line x1="2" y1="7" x2="7" y2="7"></line><line x1="2" y1="17" x2="7" y2="17"></line><line x1="17" y1="17" x2="22" y2="17"></line><line x1="17" y1="7" x2="22" y2="7"></line></svg>
+                    </div>
+                    <h3 class="channel-title">Entertainment Page</h3>
+                    <p class="channel-desc">
+                        Cross-border streaming controversies, Michael B Jordan at Dadasaheb Phalke awards, and Dune Oscar buzz.
+                    </p>
+                    <div class="channel-headline-preview">
+                        <strong>Top Story:</strong> "Michael B Jordan acknowledges Dadasaheb Phalke Award for Sinners..."
+                    </div>
+                    <a href="{% url 'entertainment' %}" class="btn btn-channel btn-channel-entertainment">Open Entertainment Desk →</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Satire Stats Strip -->
+    <section class="section stats-banner">
+        <div class="stats-grid">
+            <div class="stat-item">
+                <span class="stat-number">0%</span>
+                <span class="stat-label">Verified Facts</span>
+            </div>
+            <div class="stat-item">
+                <span class="stat-number">100%</span>
+                <span class="stat-label">Dramatic Masala</span>
+            </div>
+            <div class="stat-item">
+                <span class="stat-number">24/7</span>
+                <span class="stat-label">Non-Stop Satire</span>
+            </div>
+            <div class="stat-item">
+                <span class="stat-number">#1</span>
+                <span class="stat-label">Jhooth Ki Duniya Network</span>
+            </div>
+        </div>
+    </section>
+</div>
+{% endblock %}
